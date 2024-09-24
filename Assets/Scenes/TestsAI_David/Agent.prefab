@@ -126,8 +126,14 @@ MonoBehaviour:
   rotationSpeed: 5
   maxForce: 1
   maxSpeed: 3
+  rayLength: 5
+  avoidForce: 20
+  detectionAngle: 45
   orientation: []
   target: {fileID: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1 &8719196616871833184
 GameObject:
   m_ObjectHideFlags: 0
