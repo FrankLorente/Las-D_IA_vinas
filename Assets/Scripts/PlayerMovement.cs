@@ -4,26 +4,39 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float velocityMov = 7.0f;
-    public float velocityRot = 250.0f;
+    public float turnSpeed = 20f;
 
-    private Animator anim;
-    public float x, y;
+    Animator m_Animator;
+    Rigidbody m_Rigidbody;
+    Vector3 m_Movement;
+    Quaternion m_Rotation = Quaternion.identity;
 
     void Start()
     {
-        anim = GetComponent<Animator>(); 
+        m_Animator = GetComponent<Animator>();
+        m_Rigidbody = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        x = Input.GetAxis("Horizontal");
-        y = Input.GetAxis("Vertical");
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
 
-        transform.Rotate(0, x * Time.deltaTime * velocityRot, 0);
-        transform.Translate(0, 0, y * Time.deltaTime * velocityMov);
+        m_Movement.Set(horizontal, 0f, vertical);
+        m_Movement.Normalize();
 
-        anim.SetFloat("VelX", x);
-        anim.SetFloat("VelY", y);
+        bool hasHorizontalInput = !Mathf.Approximately(horizontal, 0f);
+        bool hasVerticalInput = !Mathf.Approximately(vertical, 0f);
+        bool isWalking = hasHorizontalInput || hasVerticalInput;
+        m_Animator.SetBool("IsWalking", isWalking);
+
+        Vector3 desiredForward = Vector3.RotateTowards(transform.forward, m_Movement, turnSpeed * Time.deltaTime, 0f);
+        m_Rotation = Quaternion.LookRotation(desiredForward);
+    }
+
+    void OnAnimatorMove()
+    {
+        m_Rigidbody.MovePosition(m_Rigidbody.position + m_Movement * m_Animator.deltaPosition.magnitude);
+        m_Rigidbody.MoveRotation(m_Rotation);
     }
 }
