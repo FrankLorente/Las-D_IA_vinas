@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public float moveSpeed = 5f;  // Nueva variable para la velocidad de movimiento
     public float turnSpeed = 20f;
 
     Animator m_Animator;
@@ -30,13 +31,23 @@ public class PlayerMovement : MonoBehaviour
         bool isWalking = hasHorizontalInput || hasVerticalInput;
         m_Animator.SetBool("IsWalking", isWalking);
 
-        Vector3 desiredForward = Vector3.RotateTowards(transform.forward, m_Movement, turnSpeed * Time.deltaTime, 0f);
-        m_Rotation = Quaternion.LookRotation(desiredForward);
+        if (isWalking)
+        {
+            // Calcular la dirección a la que el personaje debe mirar
+            Vector3 desiredForward = Vector3.RotateTowards(transform.forward, m_Movement, turnSpeed * Time.deltaTime, 0f);
+            m_Rotation = Quaternion.LookRotation(desiredForward);
+        }
     }
 
     void OnAnimatorMove()
     {
-        m_Rigidbody.MovePosition(m_Rigidbody.position + m_Movement * m_Animator.deltaPosition.magnitude);
+        // Aquí ya no dependemos de la animación para el movimiento, usamos la velocidad que definimos.
+        Vector3 moveDirection = m_Movement * moveSpeed * Time.deltaTime;
+
+        // Mover el personaje
+        m_Rigidbody.MovePosition(m_Rigidbody.position + moveDirection);
+
+        // Aplicar la rotación
         m_Rigidbody.MoveRotation(m_Rotation);
     }
 }
