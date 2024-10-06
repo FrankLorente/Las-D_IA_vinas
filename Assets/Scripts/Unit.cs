@@ -12,22 +12,26 @@ public class Unit : MonoBehaviour
     public float turnSpeed = 3;
     public float turnDst = 5;
     public float stoppingDst = 10;
-
+    public Detection playerDetection;
     Path path;
 
     void Start()
     {
         StartCoroutine(UpdatePath());
+        playerDetection = GetComponent<Detection>();
     }
 
     public void OnPathFound(Vector3[] waypoints, bool pathSuccessful)
     {
-        if (pathSuccessful)
+        if(playerDetection.isDetected)
         {
-            path = new Path(waypoints, transform.position, turnDst, stoppingDst);
+            if (pathSuccessful)
+            {
+                path = new Path(waypoints, transform.position, turnDst, stoppingDst);
 
-            StopCoroutine("FollowPath");
-            StartCoroutine("FollowPath");
+                StopCoroutine("FollowPath");
+                StartCoroutine("FollowPath");
+            }
         }
     }
 
@@ -56,7 +60,7 @@ public class Unit : MonoBehaviour
 
     IEnumerator FollowPath()
     {
-
+        
         bool followingPath = true;
         int pathIndex = 0;
         transform.LookAt(path.lookPoints[0]);
