@@ -4185,7 +4185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5970218416771328991, guid: 7a3e76d3ba476dc43adbe00faa26df0d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.635
+      value: 0.017
       objectReference: {fileID: 0}
     - target: {fileID: 5970218416771328991, guid: 7a3e76d3ba476dc43adbe00faa26df0d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8610,7 +8610,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 325989209}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -10774,6 +10774,24 @@ MonoBehaviour:
   turnSpeed: 3
   turnDst: 5
   stoppingDst: 10
+  playerDetection: {fileID: 403854559}
+--- !u!114 &403854559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403854554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be0236cf7aa42425c81111456248cb4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sphereRadius: 9.22
+  layerWeAreLookingFor:
+    serializedVersion: 2
+    m_Bits: 0
+  isDetected: 0
 --- !u!1001 &405347410
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21213,7 +21231,7 @@ Transform:
   m_GameObject: {fileID: 836598498}
   serializedVersion: 2
   m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
-  m_LocalPosition: {x: -31.27, y: 8.295445, z: -24.027878}
+  m_LocalPosition: {x: -31.27, y: 7.677445, z: -24.02788}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -24860,6 +24878,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2067998936253723459, guid: e7707aec2cc25b449a610f5087a64251, type: 3}
       insertIndex: -1
       addedObject: {fileID: 403854555}
+    - targetCorrespondingSourceObject: {fileID: 2067998936253723459, guid: e7707aec2cc25b449a610f5087a64251, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 403854559}
   m_SourcePrefab: {fileID: 100100000, guid: e7707aec2cc25b449a610f5087a64251, type: 3}
 --- !u!1001 &995131879
 PrefabInstance:
@@ -27301,7 +27322,7 @@ Transform:
   m_GameObject: {fileID: 1086381756}
   serializedVersion: 2
   m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
-  m_LocalPosition: {x: -31.27, y: 8.295445, z: -24.027878}
+  m_LocalPosition: {x: -31.27, y: 7.677445, z: -24.02788}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -32929,6 +32950,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2067998936253723459, guid: e7707aec2cc25b449a610f5087a64251, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1496359445}
+    - targetCorrespondingSourceObject: {fileID: 2067998936253723459, guid: e7707aec2cc25b449a610f5087a64251, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1496359449}
   m_SourcePrefab: {fileID: 100100000, guid: e7707aec2cc25b449a610f5087a64251, type: 3}
 --- !u!4 &1298211929 stripped
 Transform:
@@ -37268,6 +37292,24 @@ MonoBehaviour:
   turnSpeed: 3
   turnDst: 5
   stoppingDst: 10
+  playerDetection: {fileID: 1496359449}
+--- !u!114 &1496359449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496359444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be0236cf7aa42425c81111456248cb4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sphereRadius: 5
+  layerWeAreLookingFor:
+    serializedVersion: 2
+    m_Bits: 0
+  isDetected: 0
 --- !u!1 &1498522097
 GameObject:
   m_ObjectHideFlags: 0
@@ -40762,6 +40804,24 @@ MonoBehaviour:
   turnSpeed: 3
   turnDst: 5
   stoppingDst: 10
+  playerDetection: {fileID: 1675630123}
+--- !u!114 &1675630123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675630118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be0236cf7aa42425c81111456248cb4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sphereRadius: 5
+  layerWeAreLookingFor:
+    serializedVersion: 2
+    m_Bits: 0
+  isDetected: 0
 --- !u!1 &1675987396
 GameObject:
   m_ObjectHideFlags: 0
@@ -51567,6 +51627,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2067998936253723459, guid: e7707aec2cc25b449a610f5087a64251, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1675630119}
+    - targetCorrespondingSourceObject: {fileID: 2067998936253723459, guid: e7707aec2cc25b449a610f5087a64251, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1675630123}
   m_SourcePrefab: {fileID: 100100000, guid: e7707aec2cc25b449a610f5087a64251, type: 3}
 --- !u!1001 &2072947577
 PrefabInstance:
