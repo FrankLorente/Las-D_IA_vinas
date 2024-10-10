@@ -15038,7 +15038,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &568384148
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -54588,6 +54588,71 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5e4cf5af47ee60418f92554c028a4ce, type: 3}
+--- !u!1001 &6330939790075373678
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1241058785939615090, guid: 5da2762ea847dc3468112cb00789dc82, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -35.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 1241058785939615090, guid: 5da2762ea847dc3468112cb00789dc82, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1241058785939615090, guid: 5da2762ea847dc3468112cb00789dc82, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -12.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 1241058785939615090, guid: 5da2762ea847dc3468112cb00789dc82, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.86779964
+      objectReference: {fileID: 0}
+    - target: {fileID: 1241058785939615090, guid: 5da2762ea847dc3468112cb00789dc82, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1241058785939615090, guid: 5da2762ea847dc3468112cb00789dc82, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.49691424
+      objectReference: {fileID: 0}
+    - target: {fileID: 1241058785939615090, guid: 5da2762ea847dc3468112cb00789dc82, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1241058785939615090, guid: 5da2762ea847dc3468112cb00789dc82, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1241058785939615090, guid: 5da2762ea847dc3468112cb00789dc82, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 59.592
+      objectReference: {fileID: 0}
+    - target: {fileID: 1241058785939615090, guid: 5da2762ea847dc3468112cb00789dc82, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3822210260932231434, guid: 5da2762ea847dc3468112cb00789dc82, type: 3}
+      propertyPath: VisionConeMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: b042ba8948ec52f4399bfdf73db0d447, type: 2}
+    - target: {fileID: 3822210260932231434, guid: 5da2762ea847dc3468112cb00789dc82, type: 3}
+      propertyPath: VisionObstructingLayer.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 7277626525274557723, guid: 5da2762ea847dc3468112cb00789dc82, type: 3}
+      propertyPath: m_Name
+      value: Enemigo estacionario
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5da2762ea847dc3468112cb00789dc82, type: 3}
 --- !u!1001 &6730397242121987693
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -55118,6 +55183,7 @@ SceneRoots:
   - {fileID: 1086381759}
   - {fileID: 836598500}
   - {fileID: 145502812}
+  - {fileID: 6330939790075373678}
   - {fileID: 995046587}
   - {fileID: 1297746983}
   - {fileID: 2070611909}
