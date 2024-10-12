@@ -9,31 +9,43 @@ public class GridPath : MonoBehaviour
     public LayerMask unwalkableMask;
     public Vector2 gridWorldSize;
     public float nodeRadius;
-    public TerrainType[] walkableRegions;
-    public int obstacleProximityPenalty = 10;
-    Dictionary<int, int> walkableRegionsDictionary = new Dictionary<int, int>();
+
+    /*
+    [System.Serializable]
+    public class TerrainType 
+    {
+        //public LayerMask terrainMask;
+        //public int terrainPenalty;
+    }
+    */
+    //public TerrainType[] walkableRegions;
+    //public int obstacleProximityPenalty = 10;
+
+    //Dictionary<int, int> walkableRegionsDictionary = new Dictionary<int, int>();
     LayerMask walkableMask;
 
     Node[,] grid;
 
     float nodeDiameter;
     int gridSizeX, gridSizeY;
-
+    /*
     int penaltyMin = int.MaxValue;
     int penaltyMax = int.MinValue;
+    */
 
     void Awake()
     {
         nodeDiameter = nodeRadius * 2;
         gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);
         gridSizeY = Mathf.RoundToInt(gridWorldSize.y / nodeDiameter);
-
+        /*
         foreach (TerrainType region in walkableRegions)
         {
             walkableMask.value |= region.terrainMask.value;
-            walkableRegionsDictionary.Add((int)Mathf.Log(region.terrainMask.value, 2), region.terrainPenalty);
+            //Diccionario(logaritmo de region.terrainMask.value de base 2, region.penalizacion)
+            walkableRegionsDictionary.Add((int)Mathf.Log(region.terrainMask.value, 2), region.terrainPenalty);//
         }
-
+        */
         CreateGrid();
     }
 
@@ -48,6 +60,10 @@ public class GridPath : MonoBehaviour
     void CreateGrid()
     {
         grid = new Node[gridSizeX, gridSizeY];
+
+        //Esto es simplemente para que la coordenada 0,0 del grid se adecue a la posicion que queramos al escalarlo
+        //sino, la posicion de su esquina izquierda al escalarlo, en el juego, sera la misma que lo que se supone que tiene que ser su centro
+        //(SI NO SE ENTIENDE MI EXPLICACION, CAMBIAR LINEA DE ABAJO A WORLDBOTTOMLEFT IGUAL A 0 Y PROBAR A EJECUTAR)
         Vector3 worldBottomLeft = transform.position - Vector3.right * gridWorldSize.x / 2 - Vector3.forward * gridWorldSize.y / 2;
 
         for (int x = 0; x < gridSizeX; x++)
@@ -55,11 +71,12 @@ public class GridPath : MonoBehaviour
             for (int y = 0; y < gridSizeY; y++)
             {
                 Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.forward * (y * nodeDiameter + nodeRadius);
+                //ASI DETERMINA SI UNA ZONA ES ANDABLE O NO
                 bool walkable = !(Physics.CheckSphere(worldPoint, nodeRadius, unwalkableMask));
 
-                int movementPenalty = 0;
+                //int movementPenalty = 0;
 
-
+                /*
                 Ray ray = new Ray(worldPoint + Vector3.up * 50, Vector3.down);
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, 100, walkableMask))
@@ -71,16 +88,17 @@ public class GridPath : MonoBehaviour
                 {
                     movementPenalty += obstacleProximityPenalty;
                 }
+                */
 
+                grid[x, y] = new Node(walkable, worldPoint, x, y);//, movementPenalty);
 
-                grid[x, y] = new Node(walkable, worldPoint, x, y, movementPenalty);
             }
         }
 
-        BlurPenaltyMap(3);
+        //BlurPenaltyMap(3);
 
     }
-
+    /*
     void BlurPenaltyMap(int blurSize)
     {
         int kernelSize = blurSize * 2 + 1;
@@ -102,7 +120,7 @@ public class GridPath : MonoBehaviour
                 int removeIndex = Mathf.Clamp(x - kernelExtents - 1, 0, gridSizeX);
                 int addIndex = Mathf.Clamp(x + kernelExtents, 0, gridSizeX - 1);
 
-                penaltiesHorizontalPass[x, y] = penaltiesHorizontalPass[x - 1, y] - grid[removeIndex, y].movementPenalty + grid[addIndex, y].movementPenalty;
+                //penaltiesHorizontalPass[x, y] = penaltiesHorizontalPass[x - 1, y] - grid[removeIndex, y].movementPenalty + grid[addIndex, y].movementPenalty;
             }
         }
 
@@ -138,6 +156,7 @@ public class GridPath : MonoBehaviour
         }
 
     }
+    */
 
     public List<Node> GetNeighbours(Node node)
     {
@@ -163,40 +182,43 @@ public class GridPath : MonoBehaviour
         return neighbours;
     }
 
-
+    //AVERIGUAR POSICION DE UN NODO EN EL GRID, COMO MODIFICAMOS LA POSICION GLOBAL DEL GRID EN CREATE GRID, TAMBIEN HAY QUE MODIFICAR LA DEL
+    //PERSONAJE QUE ESTE EN UN NODO, PORQUE SINO NO ESTARA SOBRE EL NODO CORRESPONDIENTE
     public Node NodeFromWorldPoint(Vector3 worldPosition)
     {
         float percentX = (worldPosition.x + gridWorldSize.x / 2) / gridWorldSize.x;
         float percentY = (worldPosition.z + gridWorldSize.y / 2) / gridWorldSize.y;
+
+        //CLAMP01 HACE QUE
+        //SI ESE X ES MAYOR QUE 1, DEVUELVE 1
+        //SI ESE X ES MENOR QUE 0, DEVUELVE 0
+        //SI ESE X ESTA ENTRE 0 Y 1, DEVUELVE X (Ejemplo, 0.5)
+
         percentX = Mathf.Clamp01(percentX);
         percentY = Mathf.Clamp01(percentY);
 
         int x = Mathf.RoundToInt((gridSizeX - 1) * percentX);
         int y = Mathf.RoundToInt((gridSizeY - 1) * percentY);
-        return grid[x, y];
+
+        return grid[x, y]; //devuelve nodo en esa posicion
     }
 
     void OnDrawGizmos()
     {
+        
+        //ESTO SOLO ES PARA VISUALIZAR EL GRID
         Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSize.x, 1, gridWorldSize.y));
         if (grid != null && displayGridGizmos)
         {
             foreach (Node n in grid)
             {
-
-                Gizmos.color = Color.Lerp(Color.white, Color.black, Mathf.InverseLerp(penaltyMin, penaltyMax, n.movementPenalty));
+                
+                //Gizmos.color = Color.Lerp(Color.white, Color.black, Mathf.InverseLerp(penaltyMin, penaltyMax, n.movementPenalty));
+                Gizmos.color = Color.white;
                 Gizmos.color = (n.walkable) ? Gizmos.color : Color.red;
                 Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter));
             }
         }
+        
     }
-
-    [System.Serializable]
-    public class TerrainType
-    {
-        public LayerMask terrainMask;
-        public int terrainPenalty;
-    }
-
-
 }

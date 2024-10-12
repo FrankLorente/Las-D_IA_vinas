@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Path
 {
-
+    
     public readonly Vector3[] lookPoints;
     public readonly Line[] turnBoundaries;
     public readonly int finishLineIndex;

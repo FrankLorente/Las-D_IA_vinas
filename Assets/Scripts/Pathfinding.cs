@@ -26,9 +26,6 @@ public class Pathfinding : MonoBehaviour
     IEnumerator FindPath(Vector3 startPos, Vector3 targetPos)
     {
 
-        Stopwatch sw = new Stopwatch();
-        sw.Start();
-
         Vector3[] waypoints = new Vector3[0];
         bool pathSuccess = false;
 
@@ -36,26 +33,26 @@ public class Pathfinding : MonoBehaviour
         Node targetNode = grid.NodeFromWorldPoint(targetPos);
         startNode.parent = startNode;
 
-
+        //SI EL NODO EN EL QUE EMPEZAMOS ES ANDABLE Y EL NODO OBJETIVO TAMBIEN LO ES
         if (startNode.walkable && targetNode.walkable)
         {
-            Heap<Node> openSet = new Heap<Node>(grid.MaxSize);
-            HashSet<Node> closedSet = new HashSet<Node>();
-            openSet.Add(startNode);
+            Heap<Node> openSet = new Heap<Node>(grid.MaxSize); //openSet -> Conjunto de nodos que hay que comprobar
+            HashSet<Node> closedSet = new HashSet<Node>(); //closedSet -> Conjunto de nodos que ya se han comprobado
+            openSet.Add(startNode); //el primer nodo que comprobaremos sera obviamente el nodo de inicio(pos del enemigo cuando nos detecta)
 
-            while (openSet.Count > 0)
+            while (openSet.Count > 0) //MIENTRAS TODAVIA QUEDEN NODOS POR COMPROBAR
             {
-                Node currentNode = openSet.RemoveFirst();
-                closedSet.Add(currentNode);
+                Node currentNode = openSet.RemoveFirst(); //currentNode == nodo de openSet con menor fCost, lo removemos del heap
+                closedSet.Add(currentNode); //Añadimos a closedSet el current node, ya que lo acabamos de remover del heap, por ya esta comprobado
 
-                if (currentNode == targetNode)
+                //SI EL NODO ACTUAL ES EL MISMO QUE EL NODO OBJETIVO, DETENER 
+                if (currentNode == targetNode) 
                 {
-                    sw.Stop();
-                    //print("Path found: " + sw.ElapsedMilliseconds + " ms");
                     pathSuccess = true;
-                    break;
+                    break; //saldra del bucle si ha encontrado un camino
                 }
 
+                //COMPARAR LOS NODOS VECINOS DEL NODO PARA VER SI SE PUEDE ANDAR POR ELLOS
                 foreach (Node neighbour in grid.GetNeighbours(currentNode))
                 {
                     if (!neighbour.walkable || closedSet.Contains(neighbour))
@@ -63,7 +60,7 @@ public class Pathfinding : MonoBehaviour
                         continue;
                     }
 
-                    int newMovementCostToNeighbour = currentNode.gCost + GetDistance(currentNode, neighbour) + neighbour.movementPenalty;
+                    int newMovementCostToNeighbour = currentNode.gCost + GetDistance(currentNode, neighbour); // + neighbour.movementPenalty;
                     if (newMovementCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour))
                     {
                         neighbour.gCost = newMovementCostToNeighbour;
