@@ -12,7 +12,9 @@ public class VisionCone : MonoBehaviour
     public int VisionConeResolution = 120;
     Mesh VisionConeMesh;
     MeshFilter MeshFilter_;
-    
+
+    public bool playerDetected = false;
+    public bool visto = false;
     void Start()
     {
         transform.AddComponent<MeshRenderer>().material = VisionConeMaterial;
@@ -29,15 +31,14 @@ public class VisionCone : MonoBehaviour
 
     void DrawVisionCone()
     {
-	int[] triangles = new int[(VisionConeResolution - 1) * 3];
-    	Vector3[] Vertices = new Vector3[VisionConeResolution + 1];
+        int[] triangles = new int[(VisionConeResolution - 1) * 3];
+        Vector3[] Vertices = new Vector3[VisionConeResolution + 1];
         Vertices[0] = Vector3.zero;
         float Currentangle = -VisionAngle / 2;
         float angleIcrement = VisionAngle / (VisionConeResolution - 1);
         float Sine;
         float Cosine;
-
-        bool playerDetected = false; // Variable para saber si se ha detectado al jugador
+        //bool playerDetected = false; // Variable para saber si se ha detectado al jugador
 
         for (int i = 0; i < VisionConeResolution; i++)
         {
@@ -45,21 +46,52 @@ public class VisionCone : MonoBehaviour
             Cosine = Mathf.Cos(Currentangle);
             Vector3 RaycastDirection = (transform.forward * Cosine) + (transform.right * Sine);
             Vector3 VertForward = (Vector3.forward * Cosine) + (Vector3.right * Sine);
+            
+            
             if (Physics.Raycast(transform.position, RaycastDirection, out RaycastHit hit, VisionRange, VisionObstructingLayer))
             {
                 Vertices[i + 1] = VertForward * hit.distance;
-
+                //playerDetected = hit.collider.CompareTag("Player");
+                
                 // Verificar si el objeto golpeado es el jugador
-                if (hit.collider.CompareTag("Player"))
+
+
+                if (hit.collider.CompareTag("Player") == true)
                 {
-                    playerDetected = true; // Se ha detectado al jugador
+                    //visto = true;
+                    //Debug.Log("JUGADOR DETECTADO");
+                    //visto = true;
+                    playerDetected = true;
+                    //Debug.Log(playerDetected);
+                    
+                    //Debug.Log(playerDetected);
+
                 }
+
+                /*
+                else
+                {
+                    //visto = false; // Se ha detectado al jugador
+                    //Debug.Log("JUGADOR NO DETECTADO");
+                    //Debug.Log(playerDetected);
+                    //visto = false;
+                }
+                */
+
+
             }
             else
             {
                 Vertices[i + 1] = VertForward * VisionRange;
+                if(playerDetected == true)
+                {
+                    playerDetected = false;
+                }
+                
+                //Debug.Log(playerDetected);
             }
 
+            
 
             Currentangle += angleIcrement;
         }
@@ -69,18 +101,10 @@ public class VisionCone : MonoBehaviour
             triangles[i + 1] = j + 1;
             triangles[i + 2] = j + 2;
         }
-        VisionConeMesh.Clear();
+        //VisionConeMesh.Clear();
         VisionConeMesh.vertices = Vertices;
         VisionConeMesh.triangles = triangles;
         MeshFilter_.mesh = VisionConeMesh;
 
-        // Si se ha detectado al jugador, mostrar el mensaje en la consola
-        if (playerDetected)
-        {
-            Debug.Log("JUGADOR DETECTADO");
-
-        }
     }
-
-
 }

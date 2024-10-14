@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Unit : MonoBehaviour
 {
@@ -7,7 +8,9 @@ public class Unit : MonoBehaviour
     const float minPathUpdateTime = .2f;
     const float pathUpdateMoveThreshold = .5f;
 
-    public Transform target;
+    public Transform player;
+    public List<Transform> listaPuntos;
+    private Transform target;
     public float speed = 20;
     public float turnSpeed = 3;
     public float turnDst = 5;
@@ -21,9 +24,36 @@ public class Unit : MonoBehaviour
         playerDetection = GetComponent<Detection>();
     }
 
+    private void Update()
+    {
+        if (playerDetection.isDetected)
+        {
+            target = player;
+        }
+        else
+        {
+            target = listaPuntos[0];
+            if (target == listaPuntos[0])
+            {
+
+            }
+        }
+    }
+
     public void OnPathFound(Vector3[] waypoints, bool pathSuccessful)
     {
         if(playerDetection.isDetected) //Si se detecta al personaje principal, que el enemigo haga un camino hasta él
+        {
+            if (pathSuccessful) //Una vez el camino sea valido(comprobado usando A*)
+            {
+                path = new Path(waypoints, transform.position, turnDst, stoppingDst);
+
+                StopCoroutine("FollowPath");
+                StartCoroutine("FollowPath");
+            }
+        }
+
+        else
         {
             if (pathSuccessful) //Una vez el camino sea valido(comprobado usando A*)
             {
@@ -42,6 +72,7 @@ public class Unit : MonoBehaviour
         {
             yield return new WaitForSeconds(.3f);
         }
+
         PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
 
         float sqrMoveThreshold = pathUpdateMoveThreshold * pathUpdateMoveThreshold;
