@@ -12,10 +12,13 @@ public class PlayerMovement : MonoBehaviour
     Vector3 m_Movement;
     Quaternion m_Rotation = Quaternion.identity;
 
+    AudioSource m_AudioSource;
+
     void Start()
     {
         m_Animator = GetComponent<Animator>();
         m_Rigidbody = GetComponent<Rigidbody>();
+        m_AudioSource = GetComponent<AudioSource>();
     }
 
     void FixedUpdate()
@@ -36,16 +39,29 @@ public class PlayerMovement : MonoBehaviour
             // Calcular la dirección a la que el personaje debe mirar
             Vector3 desiredForward = Vector3.RotateTowards(transform.forward, m_Movement, turnSpeed * Time.deltaTime, 0f);
             m_Rotation = Quaternion.LookRotation(desiredForward);
+            if (!m_AudioSource.isPlaying)
+            {
+                m_AudioSource.Play();
+            }
         }
+        else
+        {
+            m_AudioSource.Stop();
+        }
+        
     }
 
     void OnAnimatorMove()
     {
+        
         // Aquí ya no dependemos de la animación para el movimiento, usamos la velocidad que definimos.
         Vector3 moveDirection = m_Movement * moveSpeed * Time.deltaTime;
 
         // Mover el personaje
         m_Rigidbody.MovePosition(m_Rigidbody.position + moveDirection);
+        
+
+        //m_Rigidbody.MovePosition(m_Rigidbody.position + m_Movement * m_Animator.deltaPosition.magnitude);
 
         // Aplicar la rotación
         m_Rigidbody.MoveRotation(m_Rotation);
