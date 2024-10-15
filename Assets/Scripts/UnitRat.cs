@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Unit : MonoBehaviour
+public class UnitRat : MonoBehaviour
 {
 
     const float minPathUpdateTime = .2f;
@@ -15,13 +15,13 @@ public class Unit : MonoBehaviour
     public float turnSpeed = 3;
     public float turnDst = 5;
     public float stoppingDst = 10;
-    public Detection playerDetection;
+    public DetectionRat playerDetection;
     Path path;
 
     void Start()
     {
         StartCoroutine(UpdatePath());
-        playerDetection = GetComponent<Detection>();
+        playerDetection = GetComponent<DetectionRat>();
     }
 
     private void Update()
@@ -30,10 +30,12 @@ public class Unit : MonoBehaviour
         {
             target = player;
         }
+        /*
         else
         {
             Patrullar(listaPuntos);
         }
+        */
     }
 
     public void Patrullar(List<Transform> lista)

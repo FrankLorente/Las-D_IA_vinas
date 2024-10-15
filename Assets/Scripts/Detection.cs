@@ -7,6 +7,7 @@ public class Detection : MonoBehaviour
 {
     public float sphereRadius = 5.0f;
     public LayerMask layerWeAreLookingFor;
+    //public LayerMask layerPatrol;
     public bool isDetected = false;
 
     private VisionCone visionCone; // Agregamos una variable para almacenar la referencia al script del hijo
