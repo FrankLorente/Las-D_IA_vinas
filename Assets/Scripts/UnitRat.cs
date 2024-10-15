@@ -9,7 +9,7 @@ public class UnitRat : MonoBehaviour
     const float pathUpdateMoveThreshold = .5f;
 
     public Transform player;
-    public List<Transform> listaPuntos;
+    public List<GameObject> listaPuntos;
     public Transform target;
     public float speed = 20;
     public float turnSpeed = 3;
@@ -18,10 +18,18 @@ public class UnitRat : MonoBehaviour
     public DetectionRat playerDetection;
     Path path;
 
+    [HideInInspector] public int siguienteWaypoint = 0;
+
     void Start()
     {
         StartCoroutine(UpdatePath());
         playerDetection = GetComponent<DetectionRat>();
+
+        listaPuntos[0].SetActive(true); // dara error si la lista esta vacia
+        for(int i = 1; i < listaPuntos.Count; i++)
+        { 
+            listaPuntos[i].gameObject.SetActive(false);
+        }
     }
 
     private void Update()
@@ -30,17 +38,15 @@ public class UnitRat : MonoBehaviour
         {
             target = player;
         }
-        /*
         else
         {
             Patrullar(listaPuntos);
         }
-        */
     }
 
-    public void Patrullar(List<Transform> lista)
+    public void Patrullar(List<GameObject> lista)
     {
-        target = lista[0];
+        target = listaPuntos[siguienteWaypoint].transform;
     }
     public void OnPathFound(Vector3[] waypoints, bool pathSuccessful)
     {

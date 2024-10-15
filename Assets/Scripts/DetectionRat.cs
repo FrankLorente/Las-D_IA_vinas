@@ -31,33 +31,21 @@ public class DetectionRat : MonoBehaviour
             Debug.Log("Something is here");
         }
 
-        else if(isDetected && (!Physics.CheckSphere(transform.position, sphereRadius, layerWeAreLookingFor)))// || (visionCone != null && !visionCone.playerDetected)))// && !Physics.CheckSphere(transform.position, sphereRadius, layerWeAreLookingFor))
+        else if (isDetected && (!Physics.CheckSphere(transform.position, sphereRadius, layerWeAreLookingFor)))// || (visionCone != null && !visionCone.playerDetected)))// && !Physics.CheckSphere(transform.position, sphereRadius, layerWeAreLookingFor))
         {
             isDetected = false;
             //visionCone.visto = false;
             Debug.Log("Something is NOT here");
         }
 
-        else if(!isDetected)
+        else if(Physics.CheckSphere(transform.position, sphereRadius, layerPatrol))
         {
-            if(Physics.CheckSphere(transform.position, sphereRadius, layerPatrol))
-            {
-                if(unit.target == unit.listaPuntos[0])
-                {
-                    unit.target = unit.listaPuntos[1];
-                }
-
-                else if (unit.target == unit.listaPuntos[1])
-                {
-                    unit.target = unit.listaPuntos[0];
-                }
-
-                else if (unit.target == unit.player)
-                {
-                    unit.target = unit.listaPuntos[0];
-                }
-                //unit.Patrullar(unit.listaPuntos);
-            }
+            unit.listaPuntos[unit.siguienteWaypoint].SetActive(false);
+            if (unit.siguienteWaypoint < unit.listaPuntos.Count - 1)
+                unit.siguienteWaypoint++;
+            else
+                unit.siguienteWaypoint = 0;
+            unit.listaPuntos[unit.siguienteWaypoint].SetActive(true);
         }
 
         //else if (visionCone != null)
