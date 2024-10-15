@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f;  // Nueva variable para la velocidad de movimiento
-    public float turnSpeed = 20f;
+    public float moveSpeed = .5f;  // Nueva variable para la velocidad de movimiento
+    public float turnSpeed = 10f;
 
     Animator m_Animator;
     Rigidbody m_Rigidbody;
@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (isWalking)
         {
-            // Calcular la dirección a la que el personaje debe mirar
+            // Calcular la direcciï¿½n a la que el personaje debe mirar
             Vector3 desiredForward = Vector3.RotateTowards(transform.forward, m_Movement, turnSpeed * Time.deltaTime, 0f);
             m_Rotation = Quaternion.LookRotation(desiredForward);
             if (!m_AudioSource.isPlaying)
@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
     void OnAnimatorMove()
     {
         
-        // Aquí ya no dependemos de la animación para el movimiento, usamos la velocidad que definimos.
+        // Aquï¿½ ya no dependemos de la animaciï¿½n para el movimiento, usamos la velocidad que definimos.
         Vector3 moveDirection = m_Movement * moveSpeed * Time.deltaTime;
 
         // Mover el personaje
@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
 
         //m_Rigidbody.MovePosition(m_Rigidbody.position + m_Movement * m_Animator.deltaPosition.magnitude);
 
-        // Aplicar la rotación
+        // Aplicar la rotaciï¿½n
         m_Rigidbody.MoveRotation(m_Rotation);
     }
 }
