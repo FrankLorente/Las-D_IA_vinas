@@ -1,24 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Detection : MonoBehaviour
 {
     public float sphereRadius = 5.0f;
+    public float sphereRadiusPatrol = 1.0f;
     public LayerMask layerWeAreLookingFor;
-    //public LayerMask layerPatrol;
+    public LayerMask layerPatrol;
     public bool isDetected = false;
 
-    private VisionCone visionCone; // Agregamos una variable para almacenar la referencia al script del hijo
+    private ConoDeVision visionCone; // Agregamos una variable para almacenar la referencia al script del hijo
 
     void Start()
     {
         //audioSource = GetComponent<AudioSource>();
-        visionCone = GetComponentInChildren<VisionCone>();
+        visionCone = GetComponentInChildren<ConoDeVision>();
     }
     
-    void Update()
+    public virtual void MiUpdate()
     {
         // Play a noise if an object is within the sphere's radius.
 

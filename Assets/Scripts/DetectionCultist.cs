@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DetectionRat : Detection
+public class DetectionCultist : Detection
 {
     public Unit unit;    // nuevo
-    
+
     void Update()
     {
         base.MiUpdate();
 
-        if(Physics.CheckSphere(transform.position, sphereRadiusPatrol, layerPatrol))
+        if (Physics.CheckSphere(transform.position, sphereRadiusPatrol, layerPatrol))
         {
             unit.listaPuntos[unit.siguienteWaypoint].SetActive(false);
             if (unit.siguienteWaypoint < unit.listaPuntos.Count - 1)
