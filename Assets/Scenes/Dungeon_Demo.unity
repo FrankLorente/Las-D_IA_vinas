@@ -32450,7 +32450,7 @@ GameObject:
   - component: {fileID: 1274054255}
   - component: {fileID: 1274054254}
   m_Layer: 0
-  m_Name: TriggerExit
+  m_Name: f
   m_TagString: ExitTrigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32536,7 +32536,7 @@ Transform:
   m_GameObject: {fileID: 1274054253}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -27.1, y: 0.91997635, z: -17.2}
+  m_LocalPosition: {x: -31.9, y: 0.91997635, z: -16.79}
   m_LocalScale: {x: 3.0311, y: 4.6363, z: 4.3771}
   m_ConstrainProportionsScale: 0
   m_Children: []

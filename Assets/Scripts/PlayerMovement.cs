@@ -65,7 +65,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (m_IsPlayerAtExit)
         {
-            
+            EndLevel();
+
 
             //EndLevel();
         }
@@ -98,8 +99,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (other.CompareTag("ExitTrigger") && TieneLlave)
         {
-            Debug.Log("Fin del nivel.");
-            EndLevel();
+            //Debug.Log("Fin del nivel.");
             m_IsPlayerAtExit = true;
             
         }
@@ -107,19 +107,16 @@ public class PlayerMovement : MonoBehaviour
 
     void EndLevel()
     {
-        UnityEditor.EditorApplication.isPlaying = false;
-
-
-        /*
+        
         m_Timer += Time.deltaTime;
-        float alphaValue = m_Timer / fadeDuration;
-        exitBackgroundImageCanvasGroup.alpha = Mathf.Clamp01(alphaValue);
+
+        exitBackgroundImageCanvasGroup.alpha = m_Timer / fadeDuration;
+
         if (m_Timer > fadeDuration + displayImageDuration)
         {
-            Debug.Log("Final.");
+            Debug.Log("Fin del nivel.");
             UnityEditor.EditorApplication.isPlaying = false;
             Application.Quit();
         }
-        */
     }
 }

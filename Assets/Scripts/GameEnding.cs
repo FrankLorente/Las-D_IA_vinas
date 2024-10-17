@@ -20,16 +20,10 @@ public class GameEnding : MonoBehaviour
         Debug.Log("Colisión detectada con: " + other.gameObject.name);
 
 
-        if (other.gameObject == player && TieneLlave)
+        if (other.gameObject == player)
         {
             m_IsPlayerAtExit = true;
             Debug.Log("El jugador ha llegado a la salida y tiene la llave.");
-        }
-
-        if (Llave == player)
-        {
-            TieneLlave = true;
-            Llave.SetActive(false);
         }
     }
 
@@ -43,7 +37,8 @@ public class GameEnding : MonoBehaviour
 
     void EndLevel()
     {
-        /*
+        Debug.Log("Fin del nivel2.");
+
         m_Timer += Time.deltaTime;
 
         exitBackgroundImageCanvasGroup.alpha = m_Timer / fadeDuration;
@@ -53,23 +48,6 @@ public class GameEnding : MonoBehaviour
             Debug.Log("Fin del nivel.");
             Application.Quit();
         }
-        */
-
-        // Incrementa el temporizador con el tiempo
-        m_Timer += Time.deltaTime;
-
-        // Calcula el valor alpha basado en el tiempo transcurrido
-        float alphaValue = m_Timer / fadeDuration;
-
-        // Asegúrate de que el alpha no sea mayor que 1
-        exitBackgroundImageCanvasGroup.alpha = Mathf.Clamp01(alphaValue);
-
-        // Una vez que el tiempo transcurrido supere la duración del fade y la duración de la imagen, finaliza el juego
-        if (m_Timer > fadeDuration + displayImageDuration)
-        {
-            Debug.Log("Final.");
-            UnityEditor.EditorApplication.isPlaying = false;
-            Application.Quit(); // Termina el juego
-        }
+        
     }
 }
