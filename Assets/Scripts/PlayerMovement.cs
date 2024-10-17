@@ -14,11 +14,25 @@ public class PlayerMovement : MonoBehaviour
 
     AudioSource m_AudioSource;
 
+    public float pickUpRange = 2.0f;
+    public GameObject itemKey;
+
+    public float fadeDuration = 1f;
+    public float displayImageDuration = 1f;
+    public CanvasGroup exitBackgroundImageCanvasGroup;
+    public bool m_IsPlayerAtExit = false;
+    float m_Timer;
+    public bool TieneLlave = false;
+    public GameObject triggerGameEnding;
+
+    //public GameEnding gameEnding;
     void Start()
     {
         m_Animator = GetComponent<Animator>();
         m_Rigidbody = GetComponent<Rigidbody>();
         m_AudioSource = GetComponent<AudioSource>();
+        //gameEnding = FindObjectOfType<gameEnding>();
+        triggerGameEnding.GetComponent<MeshRenderer>().enabled = false;
     }
 
     void FixedUpdate()
@@ -48,7 +62,14 @@ public class PlayerMovement : MonoBehaviour
         {
             m_AudioSource.Stop();
         }
-        
+
+        if (m_IsPlayerAtExit)
+        {
+            
+
+            //EndLevel();
+        }
+
     }
 
     void OnAnimatorMove()
@@ -65,5 +86,40 @@ public class PlayerMovement : MonoBehaviour
 
         // Aplicar la rotaci�n
         m_Rigidbody.MoveRotation(m_Rotation);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Key"))  // Asegúrate de que el objeto tenga esta etiqueta
+        {
+            TieneLlave = true;
+            Debug.Log("Coge llave");
+            itemKey.SetActive(false);
+        }
+        if (other.CompareTag("ExitTrigger") && TieneLlave)
+        {
+            Debug.Log("Fin del nivel.");
+            EndLevel();
+            m_IsPlayerAtExit = true;
+            
+        }
+    }
+
+    void EndLevel()
+    {
+        UnityEditor.EditorApplication.isPlaying = false;
+
+
+        /*
+        m_Timer += Time.deltaTime;
+        float alphaValue = m_Timer / fadeDuration;
+        exitBackgroundImageCanvasGroup.alpha = Mathf.Clamp01(alphaValue);
+        if (m_Timer > fadeDuration + displayImageDuration)
+        {
+            Debug.Log("Final.");
+            UnityEditor.EditorApplication.isPlaying = false;
+            Application.Quit();
+        }
+        */
     }
 }
