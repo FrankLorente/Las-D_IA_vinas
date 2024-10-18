@@ -5,6 +5,7 @@ using UnityEngine;
 public class DetectionCultist : Detection
 {
     public Unit unit;    // nuevo
+    public ConoDeVision cono;
 
     void Update()
     {

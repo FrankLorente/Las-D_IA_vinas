@@ -2569,9 +2569,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Enemigo din\xE1mico"
       objectReference: {fileID: 0}
+    - target: {fileID: 4950779065795438720, guid: 8cb75dc2fdd63734988b8358f1314d25, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9165535137218041895, guid: 8cb75dc2fdd63734988b8358f1314d25, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 0f1eb8fcb39d732419a570705c23a921, type: 3}
     - target: {fileID: 9165535137218041895, guid: 8cb75dc2fdd63734988b8358f1314d25, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9165535137218041895, guid: 8cb75dc2fdd63734988b8358f1314d25, type: 3}
+      propertyPath: m_CullingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9165535137218041895, guid: 8cb75dc2fdd63734988b8358f1314d25, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7416841827033409389, guid: 8cb75dc2fdd63734988b8358f1314d25, type: 3}
@@ -11061,6 +11077,7 @@ MonoBehaviour:
   stoppingDst: 1
   playerDetection: {fileID: 0}
   siguienteWaypoint: 0
+  detectado: 0
 --- !u!114 &403854562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11083,6 +11100,7 @@ MonoBehaviour:
     m_Bits: 512
   isDetected: 0
   unit: {fileID: 403854556}
+  cono: {fileID: 0}
 --- !u!1001 &405347410
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28618,6 +28636,7 @@ MonoBehaviour:
   stoppingDst: 10
   playerDetection: {fileID: 0}
   siguienteWaypoint: 0
+  detectado: 0
 --- !u!1001 &1124696579
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38310,6 +38329,7 @@ MonoBehaviour:
   stoppingDst: 10
   playerDetection: {fileID: 1496359449}
   siguienteWaypoint: 0
+  detectado: 0
 --- !u!114 &1496359449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42158,6 +42178,7 @@ MonoBehaviour:
   stoppingDst: 10
   playerDetection: {fileID: 1675630123}
   siguienteWaypoint: 0
+  detectado: 0
 --- !u!114 &1675630123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54327,6 +54348,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   visibleTargets: []
+  fadeDuration: 1
+  displayImageDuration: 1
+  exitBackgroundImageCanvasGroup: {fileID: 0}
 --- !u!4 &2115169138 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1149450743610261583, guid: dc02f77b0506f764c9d22c61c681c4af, type: 3}
@@ -55472,7 +55496,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 613890572170807741, guid: 4af92b298249b4a48936c07d4e51b2df, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -36.04
+      value: -36.575
       objectReference: {fileID: 0}
     - target: {fileID: 613890572170807741, guid: 4af92b298249b4a48936c07d4e51b2df, type: 3}
       propertyPath: m_LocalPosition.y
@@ -55480,7 +55504,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 613890572170807741, guid: 4af92b298249b4a48936c07d4e51b2df, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -11.16
+      value: -11.158
       objectReference: {fileID: 0}
     - target: {fileID: 613890572170807741, guid: 4af92b298249b4a48936c07d4e51b2df, type: 3}
       propertyPath: m_LocalRotation.w
@@ -55545,6 +55569,10 @@ PrefabInstance:
     - target: {fileID: 9163626923016444855, guid: 4af92b298249b4a48936c07d4e51b2df, type: 3}
       propertyPath: m_Name
       value: Enemigo estacionario
+      objectReference: {fileID: 0}
+    - target: {fileID: 9163626923016444855, guid: 4af92b298249b4a48936c07d4e51b2df, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

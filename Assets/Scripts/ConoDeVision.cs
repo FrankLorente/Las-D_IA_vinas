@@ -21,15 +21,34 @@ public class ConoDeVision : MonoBehaviour
 
 
 
-	void Start()
+
+    public float fadeDuration = 1f;
+    public float displayImageDuration = 1f;
+    public CanvasGroup exitBackgroundImageCanvasGroup;
+    float m_Timer;
+	bool detected = false;
+
+
+
+    void Start()
 	{
 		StartCoroutine("FindTargetsWithDelay", .2f);
 
+		GameObject canvasObject = GameObject.Find("Final");
+
+		exitBackgroundImageCanvasGroup = canvasObject.GetComponent<CanvasGroup>();
 	}
 
+    private void Update()
+    {
+        if (detected)
+		{
+            LoseGame();
 
+        }
+    }
 
-	IEnumerator FindTargetsWithDelay(float delay)
+    IEnumerator FindTargetsWithDelay(float delay)
 	{
 		while (true)
 		{
@@ -67,7 +86,8 @@ public class ConoDeVision : MonoBehaviour
 						print("Detectado");
 						//GetComponentInParent<Detection>().isDetected = true;
 						Debug.Log("Jugador detected");
-						
+
+						detected = true;						
 					}					
 				}
 				else
@@ -104,5 +124,21 @@ public class ConoDeVision : MonoBehaviour
 		Gizmos.DrawWireSphere(transform.position, rayRange);
 		
 	}
-	
+
+
+    void LoseGame()
+    {
+
+        m_Timer += Time.deltaTime;
+
+        exitBackgroundImageCanvasGroup.alpha = m_Timer / fadeDuration;
+
+        if (m_Timer > fadeDuration + displayImageDuration)
+        {
+            Debug.Log("Fin del nivel.");
+            UnityEditor.EditorApplication.isPlaying = false;
+            Application.Quit();
+        }
+    }
+
 }

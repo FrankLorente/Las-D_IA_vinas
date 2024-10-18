@@ -19,6 +19,10 @@ public class Unit : MonoBehaviour
     Path path;
 
     [HideInInspector] public int siguienteWaypoint = 0;
+    public bool detectado;
+
+
+    Animator m_Animator;
 
     void Start()
     {
@@ -32,6 +36,9 @@ public class Unit : MonoBehaviour
         }
 
         target = listaPuntos[0].transform;
+
+        m_Animator = GetComponent<Animator>();
+
     }
 
     private void Update()
@@ -44,6 +51,14 @@ public class Unit : MonoBehaviour
         {
             Patrullar(listaPuntos);
         }
+
+        if (speed > 0)
+        {
+            m_Animator.SetBool("IsWalking", true);
+        }
+
+        
+
     }
 
     public void Patrullar(List<GameObject> lista)
