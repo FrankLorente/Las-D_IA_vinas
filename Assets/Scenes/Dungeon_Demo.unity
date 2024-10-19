@@ -2592,7 +2592,13 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 7416841827033409389, guid: 8cb75dc2fdd63734988b8358f1314d25, type: 3}
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 644027910916855787, guid: 8cb75dc2fdd63734988b8358f1314d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 428554274}
+    - targetCorrespondingSourceObject: {fileID: 644027910916855787, guid: 8cb75dc2fdd63734988b8358f1314d25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 954696485}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4950779065795438720, guid: 8cb75dc2fdd63734988b8358f1314d25, type: 3}
       insertIndex: -1
@@ -2601,6 +2607,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1122195503}
   m_SourcePrefab: {fileID: 100100000, guid: 8cb75dc2fdd63734988b8358f1314d25, type: 3}
+--- !u!4 &84670984 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 644027910916855787, guid: 8cb75dc2fdd63734988b8358f1314d25, type: 3}
+  m_PrefabInstance: {fileID: 84670983}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &87966057
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11090,7 +11101,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc014be5b68ee42439efbb9e9bf70cfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sphereRadius: 5
   sphereRadiusPatrol: 1
   layerWeAreLookingFor:
     serializedVersion: 2
@@ -11098,9 +11108,8 @@ MonoBehaviour:
   layerPatrol:
     serializedVersion: 2
     m_Bits: 512
-  isDetected: 0
+  visionCone: {fileID: 0}
   unit: {fileID: 403854556}
-  cono: {fileID: 1593868791}
   _deathDistance: 1
   _safeDistance: 10
   fadeDuration: 1
@@ -11990,6 +11999,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2470529085381542805, guid: a9c55b2fac05ba248a24bd117da7b964, type: 3}
   m_PrefabInstance: {fileID: 426316927}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &428554273
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 428554274}
+  m_Layer: 0
+  m_Name: OrigenChillido
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &428554274
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 428554273}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 84670984}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &429050434 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1149450743610261583, guid: dc02f77b0506f764c9d22c61c681c4af, type: 3}
@@ -24737,6 +24777,60 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4725356937742777146, guid: c559a22601843db4c927941c06a8b94b, type: 3}
   m_PrefabInstance: {fileID: 226132586}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &954696484
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 954696485}
+  - component: {fileID: 954696486}
+  m_Layer: 0
+  m_Name: VisionCone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &954696485
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 954696484}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 84670984}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &954696486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 954696484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10906444290008549906622920c96452, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewRadius: 5
+  viewAngle: 90
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 128
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 0
+  visibleTargets: []
+  detected: 0
 --- !u!1001 &955383691
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28939,7 +29033,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24e7cabd2add28c4bb68d915ff9dad74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sphereRadius: 1.57
   sphereRadiusPatrol: 1
   layerWeAreLookingFor:
     serializedVersion: 2
@@ -28947,8 +29040,13 @@ MonoBehaviour:
   layerPatrol:
     serializedVersion: 2
     m_Bits: 512
-  isDetected: 0
+  visionCone: {fileID: 0}
   unit: {fileID: 1122195504}
+  _origenChillido: {fileID: 428554274}
+  _radioSonido: 20
+  _mascaraEnemigos:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &1122195504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38679,7 +38777,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be0236cf7aa42425c81111456248cb4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sphereRadius: 5
   sphereRadiusPatrol: 1
   layerWeAreLookingFor:
     serializedVersion: 2
@@ -38687,7 +38784,7 @@ MonoBehaviour:
   layerPatrol:
     serializedVersion: 2
     m_Bits: 0
-  isDetected: 0
+  visionCone: {fileID: 0}
 --- !u!1 &1498522097
 GameObject:
   m_ObjectHideFlags: 0
@@ -42613,7 +42710,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be0236cf7aa42425c81111456248cb4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sphereRadius: 5
   sphereRadiusPatrol: 1
   layerWeAreLookingFor:
     serializedVersion: 2
@@ -42621,7 +42717,7 @@ MonoBehaviour:
   layerPatrol:
     serializedVersion: 2
     m_Bits: 0
-  isDetected: 0
+  visionCone: {fileID: 0}
 --- !u!1 &1675987396
 GameObject:
   m_ObjectHideFlags: 0
@@ -47724,7 +47820,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _origenLadrido: {fileID: 1647121214}
-  _radioSonido: 70
+  _radioSonido: 30
   _mascaraEnemigos:
     serializedVersion: 2
     m_Bits: 1024

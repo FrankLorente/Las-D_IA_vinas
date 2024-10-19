@@ -56,7 +56,7 @@ public class Unit : MonoBehaviour
 
     public void OnPathFound(Vector3[] waypoints, bool pathSuccessful)
     {
-        if(playerDetection.isDetected) //Si se detecta al personaje principal, que el enemigo haga un camino hasta él
+        if(playerDetection.visionCone.detected) //Si se detecta al personaje principal, que el enemigo haga un camino hasta él
         {
             if (pathSuccessful) //Una vez el camino sea valido(comprobado usando A*)
             {

@@ -6,7 +6,6 @@ using UnityEngine;
 public class DetectionCultist : Detection
 {
     public Unit unit;
-    public ConoDeVision cono;
     public float _deathDistance = 1f;   // si el cultista consigue acercarse lo suficiente al jugador este muere
     public float _safeDistance = 10f;   // si el jugador consigue alejarse lo suficiente el cultista deja de seguirle
 
@@ -32,6 +31,8 @@ public class DetectionCultist : Detection
 
     private void Start()
     {
+        visionCone = GetComponentInChildren<ConoDeVision>();
+
         _currentState = State.idle;
         _previousState = _currentState;
 
@@ -42,11 +43,10 @@ public class DetectionCultist : Detection
 
     void Update()
     {
-        if (cono.detected)
+        if (visionCone.detected)
         {
             ChangeState(State.chase);
-            isDetected = true;
-            unit.previousTarget = unit.target;
+            //unit.previousTarget = unit.target;
             unit.target = unit.player;
         }
 
@@ -96,8 +96,8 @@ public class DetectionCultist : Detection
                 unit.siguienteWaypoint = 0;
             unit.listaPuntos[unit.siguienteWaypoint].SetActive(true);
 
-            unit.previousTarget = unit.target;
             unit.target = unit.listaPuntos[unit.siguienteWaypoint].transform;
+            unit.previousTarget = unit.target;
         }
 
         // como lidio con los cambios de estado en Update y HearNoise no hace falta que lo ponga aquí
@@ -105,8 +105,6 @@ public class DetectionCultist : Detection
 
     private void Check()
     {
-        Debug.Log(unit.target.position.x);
-        Debug.Log(unit.target.position.y);
         if (Vector3.Distance(this.transform.position, _noiseOrigin.position) < 2f)
         {
             // esta lo bastante cerca como para haber visto al jugador
