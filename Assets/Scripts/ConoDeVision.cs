@@ -19,34 +19,13 @@ public class ConoDeVision : MonoBehaviour
 	[HideInInspector]
 	public List<Transform> visibleTargets = new List<Transform>();
 
-
-
-
-    public float fadeDuration = 1f;
-    public float displayImageDuration = 1f;
-    public CanvasGroup exitBackgroundImageCanvasGroup;
-    float m_Timer;
-	bool detected = false;
-
-
+	[HideInInspector]
+	public bool detected = false;
 
     void Start()
 	{
 		StartCoroutine("FindTargetsWithDelay", .2f);
-
-		GameObject canvasObject = GameObject.Find("Final");
-
-		exitBackgroundImageCanvasGroup = canvasObject.GetComponent<CanvasGroup>();
 	}
-
-    private void Update()
-    {
-        if (detected)
-		{
-            LoseGame();
-
-        }
-    }
 
     IEnumerator FindTargetsWithDelay(float delay)
 	{
@@ -64,6 +43,7 @@ public class ConoDeVision : MonoBehaviour
 		
 		Collider[] targetsInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
 
+		detected = false;
 		
 		for (int i = 0; i < targetsInViewRadius.Length; i++)
 		{
@@ -83,18 +63,13 @@ public class ConoDeVision : MonoBehaviour
 					if (visibleTargets.Count == 0)
 					{
 						visibleTargets.Add(target);
-						print("Detectado");
-						//GetComponentInParent<Detection>().isDetected = true;
-						Debug.Log("Jugador detected");
 
-						detected = true;						
-					}					
+						detected = true;
+					}
 				}
 				else
 				{
 					visibleTargets.Clear();
-					print("No detectado");
-
 				}
 			}
 		}
@@ -124,21 +99,4 @@ public class ConoDeVision : MonoBehaviour
 		Gizmos.DrawWireSphere(transform.position, rayRange);
 		
 	}
-
-
-    void LoseGame()
-    {
-
-        m_Timer += Time.deltaTime;
-
-        exitBackgroundImageCanvasGroup.alpha = m_Timer / fadeDuration;
-
-        if (m_Timer > fadeDuration + displayImageDuration)
-        {
-            Debug.Log("Fin del nivel.");
-            UnityEditor.EditorApplication.isPlaying = false;
-            Application.Quit();
-        }
-    }
-
 }

@@ -22,6 +22,7 @@ public class Detection : MonoBehaviour
     {
         // Play a noise if an object is within the sphere's radius.
 
+        
         if (!isDetected && (Physics.CheckSphere(transform.position, sphereRadius, layerWeAreLookingFor)))// || (visionCone != null && visionCone.playerDetected)))//Physics.CheckSphere(transform.position, sphereRadius, layerWeAreLookingFor, QueryTriggerInteraction.Collide))
         {
             isDetected = true;

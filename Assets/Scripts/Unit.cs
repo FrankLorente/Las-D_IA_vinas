@@ -10,12 +10,13 @@ public class Unit : MonoBehaviour
 
     public Transform player;
     public List<GameObject> listaPuntos;
-    public Transform target;
+    [HideInInspector] public Transform target;
+    [HideInInspector] public Transform previousTarget;
     public float speed = 20;
     public float turnSpeed = 3;
     public float turnDst = 5;
     public float stoppingDst = 10;
-    public Detection playerDetection;
+    private Detection playerDetection;
     Path path;
 
     [HideInInspector] public int siguienteWaypoint = 0;
@@ -29,13 +30,17 @@ public class Unit : MonoBehaviour
         StartCoroutine(UpdatePath());
         playerDetection = GetComponent<Detection>();
 
-        listaPuntos[0].SetActive(true); // dara error si la lista esta vacia
-        for (int i = 1; i < listaPuntos.Count; i++)
+        if (listaPuntos.Count > 0)
         {
-            listaPuntos[i].gameObject.SetActive(false);
-        }
+            listaPuntos[0].SetActive(true);
+            for (int i = 1; i < listaPuntos.Count; i++)
+            {
+                listaPuntos[i].gameObject.SetActive(false);
+            }
 
-        target = listaPuntos[0].transform;
+            target = listaPuntos[0].transform;
+            previousTarget = target;
+        }
 
         m_Animator = GetComponent<Animator>();
 
@@ -43,28 +48,12 @@ public class Unit : MonoBehaviour
 
     private void Update()
     {
-        if (playerDetection.isDetected)
-        {
-            target = player;
-        }
-        else
-        {
-            Patrullar(listaPuntos);
-        }
-
         if (speed > 0)
         {
             m_Animator.SetBool("IsWalking", true);
         }
-
-        
-
     }
 
-    public void Patrullar(List<GameObject> lista)
-    {
-        target = listaPuntos[siguienteWaypoint].transform;
-    }
     public void OnPathFound(Vector3[] waypoints, bool pathSuccessful)
     {
         if(playerDetection.isDetected) //Si se detecta al personaje principal, que el enemigo haga un camino hasta él
