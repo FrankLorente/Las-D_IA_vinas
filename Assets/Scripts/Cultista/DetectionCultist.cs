@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DetectionCultist : Detection
 {
@@ -14,6 +15,9 @@ public class DetectionCultist : Detection
     public float displayImageDuration = 1f;
     public CanvasGroup exitBackgroundImageCanvasGroup;
     private float m_Timer;
+
+    public bool detectado = false;
+
 
 
     // FSM
@@ -37,8 +41,6 @@ public class DetectionCultist : Detection
         _previousState = _currentState;
 
         GameObject canvasObject = GameObject.Find("Final");
-
-        exitBackgroundImageCanvasGroup = canvasObject.GetComponent<CanvasGroup>();
     }
 
     void Update()
@@ -68,6 +70,11 @@ public class DetectionCultist : Detection
                 // Debug.Log("Idle");
                 Idle();
                 break;
+        }
+
+        if (detectado)
+        {
+            LoseGame();
         }
     }
 
@@ -123,7 +130,8 @@ public class DetectionCultist : Detection
         if(Vector3.Distance(this.transform.position, unit.player.position) < _deathDistance)
         {
             // el jugador se ha acercado lo suficiente como para ser atrapado
-            LoseGame();
+            //LoseGame();
+            detectado = true;
         } else if (Vector3.Distance(this.transform.position, unit.player.position) > _safeDistance)
         {
             // el jugador se ha alejado lo suficiente como para escapar ... por el momento muahahahahaa
@@ -147,7 +155,6 @@ public class DetectionCultist : Detection
     private void LoseGame() // esto solo lo necesitan los cultistas
     {
         m_Timer += Time.deltaTime;
-
         exitBackgroundImageCanvasGroup.alpha = m_Timer / fadeDuration;
 
         if (m_Timer > fadeDuration + displayImageDuration)
