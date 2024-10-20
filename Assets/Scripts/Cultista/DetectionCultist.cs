@@ -91,7 +91,6 @@ public class DetectionCultist : Detection
 
     private void Patrol()
     {
-        
         if (Physics.CheckSphere(transform.position, sphereRadiusPatrol, layerPatrol))
         {
             unit.listaPuntos[unit.siguienteWaypoint].SetActive(false);
@@ -104,11 +103,6 @@ public class DetectionCultist : Detection
             unit.target = unit.listaPuntos[unit.siguienteWaypoint].transform;
             unit.previousTarget = unit.target;
         }
-        
-
-
-        
-
     }
     private void Check()
     {
@@ -144,8 +138,9 @@ public class DetectionCultist : Detection
     {
         ChangeState(State.check);
 
-        if(unit.target != noiseOrigin)
-            unit.previousTarget = unit.target;
+        foreach (GameObject punto in unit.listaPuntos)
+            if (punto.transform == unit.target)
+                unit.previousTarget = punto.transform;
 
         unit.target  = noiseOrigin;
         _noiseOrigin = noiseOrigin;
