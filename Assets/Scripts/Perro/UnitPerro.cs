@@ -13,6 +13,7 @@ public class UnitPerro : MonoBehaviour
     private ConoDeVision _conoVision;
 
     public AudioSource _woofAudio;
+    public bool _hasBarked = false;
 
     void Start()
     {
@@ -25,18 +26,26 @@ public class UnitPerro : MonoBehaviour
         {
             // cambia estado a alarma
             // Debug.Log("WOOF WOOF");
+            if (!_hasBarked)
+            {
+                _hasBarked = true;
+                _woofAudio.Play();
+            }
+            
             Ladrar();
         }
-        else
-        {
+        else if(!_conoVision.detected) {
             // cambia estado a idle
             // Debug.Log("ZzZzz");
+            _hasBarked = false;
+            _woofAudio.Stop();
+
         }
     }
 
     private void Ladrar()
     {
-        _woofAudio.Play();
+        
         Collider[] colliders = Physics.OverlapSphere(this.transform.position, _radioSonido, _mascaraEnemigos);
 
         foreach(Collider col in colliders)
