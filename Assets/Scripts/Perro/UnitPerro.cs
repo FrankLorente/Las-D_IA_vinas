@@ -12,6 +12,8 @@ public class UnitPerro : MonoBehaviour
 
     private ConoDeVision _conoVision;
 
+    public AudioSource _woofAudio;
+
     void Start()
     {
         _conoVision = GetComponentInChildren<ConoDeVision>();
@@ -34,6 +36,7 @@ public class UnitPerro : MonoBehaviour
 
     private void Ladrar()
     {
+        _woofAudio.Play();
         Collider[] colliders = Physics.OverlapSphere(this.transform.position, _radioSonido, _mascaraEnemigos);
 
         foreach(Collider col in colliders)

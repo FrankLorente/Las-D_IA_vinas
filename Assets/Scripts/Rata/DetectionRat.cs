@@ -10,6 +10,7 @@ public class DetectionRat : Detection
     public Transform _origenChillido;
     public float _radioSonido = 20f;
     public LayerMask _mascaraEnemigos;
+    public AudioSource _skreeAudio;
 
     private void Start()
     {
@@ -41,6 +42,7 @@ public class DetectionRat : Detection
     
     private void Chillar()
     {
+        _skreeAudio.Play();
         Collider[] colliders = Physics.OverlapSphere(this.transform.position, _radioSonido, _mascaraEnemigos);
 
         foreach (Collider col in colliders)
