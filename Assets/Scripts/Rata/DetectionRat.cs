@@ -10,7 +10,9 @@ public class DetectionRat : Detection
     public Transform _origenChillido;
     public float _radioSonido = 20f;
     public LayerMask _mascaraEnemigos;
-    public AudioSource _skreeAudio;
+
+    public AudioSource _ratAudio;
+    public bool _hasSkreed = false;
 
     private void Start()
     {
@@ -21,11 +23,19 @@ public class DetectionRat : Detection
     {
         if (visionCone.detected)    // PÁNICO
         {
+            if (!_hasSkreed)
+            {
+                _hasSkreed = true;
+                _ratAudio.Play();
+            }
             // ha detectado al jugador --> entra en pánico y se pone a chillar como la ratita que es
             Chillar();
         }
         else if(Physics.CheckSphere(transform.position, sphereRadiusPatrol, layerPatrol))   // PATRULLA
         {
+            _hasSkreed = false;
+            _ratAudio.Stop();
+
             unit.target = unit.previousTarget;
 
             unit.listaPuntos[unit.siguienteWaypoint].SetActive(false);
@@ -42,7 +52,6 @@ public class DetectionRat : Detection
     
     private void Chillar()
     {
-        _skreeAudio.Play();
         Collider[] colliders = Physics.OverlapSphere(this.transform.position, _radioSonido, _mascaraEnemigos);
 
         foreach (Collider col in colliders)

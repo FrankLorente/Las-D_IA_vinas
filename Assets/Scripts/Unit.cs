@@ -25,7 +25,16 @@ public class Unit : MonoBehaviour
 
     Animator m_Animator;
 
+
     void Start()
+    {
+        MyStart();
+    }
+    private void Update()
+    {
+        MyUpdate(); 
+    }
+    protected virtual void MyStart()
     {
         StartCoroutine(UpdatePath());
         playerDetection = GetComponent<Detection>();
@@ -46,7 +55,7 @@ public class Unit : MonoBehaviour
 
     }
 
-    private void Update()
+    protected virtual void MyUpdate()
     {
         if (speed > 0)
         {
