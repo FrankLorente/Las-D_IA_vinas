@@ -16,7 +16,7 @@ public class DetectionCultist : Detection
     public CanvasGroup exitBackgroundImageCanvasGroup;
     private float m_Timer;
 
-    public bool detectado = false;
+    private bool _loseGame = false;
 
 
 
@@ -55,24 +55,20 @@ public class DetectionCultist : Detection
         switch (_currentState)
         {
             case State.chase:
-                // Debug.Log("Chase");
                 Chase();
                 break;
             case State.patrol:
-                // Debug.Log("Patrol");
                 Patrol();
                 break;
             case State.check:
-                // Debug.Log("Check");
                 Check();
                 break;
             default:
-                // Debug.Log("Idle");
                 Idle();
                 break;
         }
 
-        if (detectado)
+        if (_loseGame)
         {
             LoseGame();
         }
@@ -131,7 +127,7 @@ public class DetectionCultist : Detection
         {
             // el jugador se ha acercado lo suficiente como para ser atrapado
             //LoseGame();
-            detectado = true;
+            _loseGame = true;
         } else if (Vector3.Distance(this.transform.position, unit.player.position) > _safeDistance)
         {
             // el jugador se ha alejado lo suficiente como para escapar ... por el momento muahahahahaa

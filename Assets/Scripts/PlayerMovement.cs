@@ -67,9 +67,6 @@ public class PlayerMovement : MonoBehaviour
         if (m_IsPlayerAtExit)
         {
             EndLevel();
-
-
-            //EndLevel();
         }
 
     }
