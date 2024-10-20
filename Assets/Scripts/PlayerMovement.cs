@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
@@ -113,8 +114,9 @@ public class PlayerMovement : MonoBehaviour
         if (m_Timer > fadeDuration + displayImageDuration)
         {
             Debug.Log("Fin del nivel.");
-            UnityEditor.EditorApplication.isPlaying = false;
-            Application.Quit();
+            //UnityEditor.EditorApplication.isPlaying = false;
+            //Application.Quit();
+            SceneManager.LoadScene("Dungeon_Demo");
         }
     }
 }

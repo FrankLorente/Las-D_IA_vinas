@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 /* //DAVID CODIGO
 public class DetectionCultist : Detection
@@ -328,8 +330,9 @@ public class DetectionCultist : Detection
         if (m_Timer > fadeDuration + displayImageDuration)
         {
             Debug.Log("Fin del nivel.");
-            UnityEditor.EditorApplication.isPlaying = false;
-            Application.Quit();
+            //UnityEditor.EditorApplication.isPlaying = false;
+            //Application.Quit();
+            SceneManager.LoadScene("Dungeon_Demo");
         }
     }
 }
