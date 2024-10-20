@@ -291,6 +291,7 @@ public class DetectionCultist : Detection
     {
         unit.target = unit.player;
 
+
         if (Vector3.Distance(this.transform.position, unit.player.position) < _deathDistance)
         {
             // el jugador se ha acercado lo suficiente como para ser atrapado
@@ -321,6 +322,31 @@ public class DetectionCultist : Detection
         unit.target = noiseOrigin;
         _noiseOrigin = noiseOrigin;
     }
+
+
+    private Vector3 GetSeparationForce(float separationRadius = 2f)
+    {
+        Vector3 separationForce = Vector3.zero;
+
+        // Busca enemigos cercanos
+        Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, separationRadius);
+
+        foreach (Collider enemy in nearbyEnemies)
+        {
+            // Evitar el cálculo con uno mismo
+            if (enemy.gameObject != this.gameObject && enemy.CompareTag("Enemy"))  // Asegúrate de que los enemigos tengan el tag "Enemy"
+            {
+                // Calcula la dirección de repulsión entre enemigos
+                Vector3 directionAwayFromEnemy = transform.position - enemy.transform.position;
+                separationForce += directionAwayFromEnemy.normalized / directionAwayFromEnemy.magnitude;
+            }
+        }
+
+        return separationForce;
+    }
+
+
+
 
     private void LoseGame() // esto solo lo necesitan los cultistas
     {
