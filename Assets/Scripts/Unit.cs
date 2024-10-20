@@ -145,6 +145,8 @@ public class Unit : MonoBehaviour
                 transform.Translate(Vector3.forward * Time.deltaTime * speed * speedPercent, Space.Self);
             }
 
+            //Debug.Log("Enemigo siguiendo camino");
+
             yield return null;
 
         }
