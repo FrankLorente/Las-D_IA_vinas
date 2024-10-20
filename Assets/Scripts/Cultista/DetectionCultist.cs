@@ -91,7 +91,7 @@ public class DetectionCultist : Detection
 
     private void Patrol()
     {
-        /*
+        
         if (Physics.CheckSphere(transform.position, sphereRadiusPatrol, layerPatrol))
         {
             unit.listaPuntos[unit.siguienteWaypoint].SetActive(false);
@@ -104,41 +104,12 @@ public class DetectionCultist : Detection
             unit.target = unit.listaPuntos[unit.siguienteWaypoint].transform;
             unit.previousTarget = unit.target;
         }
-        */
+        
 
 
-        // Comprueba si hay un waypoint cercano
-    if (unit.listaPuntos.Count > 0)
-    {
-        // Comprueba si el enemigo está lo suficientemente cerca del siguiente waypoint
-        if (Vector3.Distance(transform.position, unit.listaPuntos[unit.siguienteWaypoint].transform.position) < distanciaMinimaWaypoint)
-        {
-            // Desactiva el waypoint actual y pasa al siguiente
-            unit.listaPuntos[unit.siguienteWaypoint].SetActive(false);
+        
 
-            // Actualiza el siguiente waypoint
-            if (unit.siguienteWaypoint < unit.listaPuntos.Count - 1)
-            {
-                unit.siguienteWaypoint++;
-            }
-            else
-            {
-                // Si es el último waypoint, vuelve al primero
-                unit.siguienteWaypoint = 0;
-            }
-
-            // Activa el siguiente waypoint
-            unit.listaPuntos[unit.siguienteWaypoint].SetActive(true);
-
-            // Actualiza el target del enemigo al siguiente waypoint
-            unit.target = unit.listaPuntos[unit.siguienteWaypoint].transform;
-            unit.previousTarget = unit.target;
-        }
     }
-
-        // como lidio con los cambios de estado en Update y HearNoise no hace falta que lo ponga aquí
-    }
-
     private void Check()
     {
         if (Vector3.Distance(this.transform.position, _noiseOrigin.position) < 2f)
