@@ -41,8 +41,6 @@ public class DetectionRat : Detection
     
     private void Chillar()
     {
-        Debug.Log("Skreeee!!!");
-
         Collider[] colliders = Physics.OverlapSphere(this.transform.position, _radioSonido, _mascaraEnemigos);
 
         foreach (Collider col in colliders)

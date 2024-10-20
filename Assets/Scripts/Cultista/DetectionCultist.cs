@@ -16,6 +16,8 @@ public class DetectionCultist : Detection
     public CanvasGroup exitBackgroundImageCanvasGroup;
     private float m_Timer;
 
+
+    private Transform _noiseOrigin;
     private bool _loseGame = false;
 
 
@@ -29,9 +31,7 @@ public class DetectionCultist : Detection
         chase
     }
     private State _currentState;
-    public State CurrentState { get; }
     private State _previousState;
-    private Transform _noiseOrigin;
 
     private void Start()
     {
@@ -138,13 +138,12 @@ public class DetectionCultist : Detection
 
     public void HearNoise(Transform noiseOrigin)
     {
-        Debug.Log("Escuho al perro ladrar");
-
         ChangeState(State.check);
 
         if(unit.target != noiseOrigin)
             unit.previousTarget = unit.target;
-        unit.target = noiseOrigin;
+
+        unit.target  = noiseOrigin;
         _noiseOrigin = noiseOrigin;
     }
 
