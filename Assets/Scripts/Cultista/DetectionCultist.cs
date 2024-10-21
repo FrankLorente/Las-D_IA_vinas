@@ -211,8 +211,7 @@ public class DetectionCultist : Detection
         if (visionCone.detected)
         {
             ChangeState(State.chase);
-            //unit.previousTarget = unit.target;
-            unit.target = unit.player;
+            //unit.target = unit.player;
         }
 
 
@@ -238,17 +237,14 @@ public class DetectionCultist : Detection
         }
     }
 
-    //PUEDE SER QUE FALLE ESTA FUNCION, NO SE PORQUE PERO ASI VA
     private void ChangeState(State newState)
     {
-        //_previousState = _currentState;
 
         if (_currentState != newState)
         {
             _currentState = newState;
         }
-        //_previousState = _currentState;
-        //_currentState  = newState;
+
     }
 
     private void Idle()
@@ -256,7 +252,6 @@ public class DetectionCultist : Detection
         // este estado es solo por siacaso, realmente no vale de nada
         if (unit.listaPuntos.Count > 0)
             ChangeState(State.patrol);
-
     }
 
     private void Patrol()
@@ -293,13 +288,10 @@ public class DetectionCultist : Detection
 
         if (Vector3.Distance(this.transform.position, unit.player.position) < _deathDistance)
         {
-            // el jugador se ha acercado lo suficiente como para ser atrapado
-            //LoseGame();
             _loseGame = true;
         }
         else if (Vector3.Distance(this.transform.position, unit.player.position) > _safeDistance)
         {
-            // el jugador se ha alejado lo suficiente como para escapar ... por el momento muahahahahaa
             _currentState = _previousState;
             unit.target = unit.previousTarget;
         }
